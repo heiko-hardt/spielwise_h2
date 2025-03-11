@@ -1,12 +1,8 @@
 package com.example.demo.book;
 import java.time.LocalDate;
+import java.time.Period;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
 @Table
@@ -28,9 +24,22 @@ public class Book {
     private String genre;
     private Number price;
 
+    // Speichert nicht in DB ab er per API abrufbar
+    @Transient
+    private LocalDate ageInYears;
+
 
     public Book() {
         // Standard-Konstruktor für JPA
+    }
+
+    public Book(Long id, String title, LocalDate publicationDate, String author, String genre, Number price) {
+        this.id = id;
+        this.title = title;
+        this.publicationDate = publicationDate;
+        this.author = author;
+        this.genre = genre;
+        this.price = price;
     }
 
     public Book(String title, LocalDate publicationDate, String author, String genre, Number price) {
@@ -88,6 +97,15 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public void setAgeInYears(LocalDate ageInYears) {
+        this.ageInYears = ageInYears;
+    }   
+
+    // "AgeInYears" wird über API ausgegeben aber nicht in DAtenbank gespeichert
+    public int getAgeInYears() {
+        return Period.between(this.publicationDate, LocalDate.now()).getYears();
+    }   
 
     public String toString() {
         return "Book{" +

@@ -14,7 +14,7 @@ public class BookConfig {
         return args -> {
             Book book1 = new Book(
 				"Book 1", 
-				LocalDate.of(1954, 7, 29),		
+				LocalDate.of(1955, 7, 29),		
 				"J.R.R. Tolkien", 
 				"Fantasy", 
 				19.99
