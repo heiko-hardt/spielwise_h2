@@ -22,7 +22,14 @@ public class BookService {
 			throw new IllegalStateException("Titel bereits vergeben");
 		}
 		bookRepository.save(book); // Buch in die Datenbank speichern
-		//System.out.println("Speichere Buch" + book);
-		
+		//System.out.println("Speichere Buch" + book);	
+	}
+
+	public void deleteBook(Long id) {
+		boolean exists = bookRepository.existsById(id);
+		if (!exists) {
+			throw new IllegalStateException("Buch mit ID " + id + " existiert nicht");
+		}
+		bookRepository.deleteById(id);
 	}
 }
