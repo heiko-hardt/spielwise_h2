@@ -1,5 +1,6 @@
 package com.example.demo.book;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,5 +14,15 @@ public class BookService {
 
 	public List<Book> getBooks() {
 		return bookRepository.findAll();
+	}
+
+	public void addNewBook(Book book) {
+		Optional<Book> bookOptional = bookRepository.findBookByTitle(book.getTitle());
+		if (bookOptional.isPresent()) {
+			throw new IllegalStateException("Titel bereits vergeben");
+		}
+		bookRepository.save(book); // Buch in die Datenbank speichern
+		//System.out.println("Speichere Buch" + book);
+		
 	}
 }
