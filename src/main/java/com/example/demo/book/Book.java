@@ -1,8 +1,26 @@
 package com.example.demo.book;
-
 import java.time.LocalDate;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@Table
 public class Book {
+    @Id
+    @SequenceGenerator(
+            name = "book_sequence",
+            sequenceName = "book_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "book_sequence"
+    )
     private Long id;
     private String title;
     private LocalDate publicationDate;
@@ -11,8 +29,11 @@ public class Book {
     private Number price;
 
 
-    public Book(Long id, String title, LocalDate publicationDate, String author, String genre, Number price) {
-        this.id = id;
+    public Book() {
+        // Standard-Konstruktor für JPA
+    }
+
+    public Book(String title, LocalDate publicationDate, String author, String genre, Number price) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.author = author;
