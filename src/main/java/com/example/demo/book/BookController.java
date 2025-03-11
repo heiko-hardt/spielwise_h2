@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 
 @RestController
@@ -34,6 +36,17 @@ public class BookController {
     public void deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
     }
+
+    @PutMapping(path="{id}")
+    public void updateBook(
+    @PathVariable("id") Long id,
+    @RequestParam(required = false) String title,
+    @RequestParam(required = false) String author,
+    @RequestParam(required = false) String genre,
+    @RequestParam(required = false) Number price) {
+        bookService.updateBook(id, title, author, genre, price);
+    }
+    
 }
 
 
