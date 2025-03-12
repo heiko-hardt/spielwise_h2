@@ -23,7 +23,7 @@ public class BookService {
 		if (bookOptional.isPresent()) {
 			throw new IllegalStateException("Titel bereits vergeben");
 		}
-		bookRepository.save(book); // Buch in die Datenbank speichern
+		bookRepository.save(book);
 		//System.out.println("Speichere Buch" + book);	
 	}
 

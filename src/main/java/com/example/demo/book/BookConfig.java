@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class BookConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(BookRepository repository) {
+    CommandLineRunner bookCommandLineRunner(BookRepository repository) {
         return args -> {
             Book book1 = new Book(
 				"Book 1", 
