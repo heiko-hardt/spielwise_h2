@@ -44,6 +44,7 @@ public class BookService {
 							Long authorId, 
 							String genre, 
 							Number price) {
+								
 		Book book = bookRepository.findById(id)
 				.orElseThrow(() -> new IllegalStateException("Buch mit ID " + id + " existiert nicht"));
 

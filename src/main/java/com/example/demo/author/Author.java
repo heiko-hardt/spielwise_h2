@@ -58,7 +58,7 @@ public class Author {
         return authorName;
     }
 
-    public void setName(String authorName) {
+    public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
 

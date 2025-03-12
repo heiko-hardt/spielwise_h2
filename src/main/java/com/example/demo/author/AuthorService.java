@@ -1,9 +1,12 @@
 package com.example.demo.author;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.example.demo.book.BookRepository;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -40,11 +43,26 @@ public class AuthorService {
 
         if (bookCount > 0) {
             throw new IllegalStateException("Author mit ID " + id + " kann nicht gelöscht werden, weil er noch Bücher hat.");
-        }
-        
+        }  
 		authorRepository.deleteById(id);
 	}
 
+    @Transactional // dank @Transactional brauchen wir hier keine @Query zu definieren
+    public void updateAuthor(
+                        Long id,
+                        String authorName,
+                        LocalDate birthDate,
+                        String nationality) {
+                            
+        Author author = authorRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Author mit ID " + id + " existiert nicht"));
+
+        if (authorName != null && 
+				authorName.length() > 0 && 
+				!author.getAuthorName().equals(authorName)) {
+			author.setAuthorName(authorName);
+		}        
+    }
 
 
 
