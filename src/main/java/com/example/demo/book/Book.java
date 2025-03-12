@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.lang.Nullable;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Book {
     @Id
     @SequenceGenerator(
@@ -56,16 +58,4 @@ public class Book {
     public int getAgeInYears() {
         return Period.between(this.publicationDate, LocalDate.now()).getYears();
     }   
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", publicationDate=" + publicationDate +
-                ", author='" + author + '\'' +
-                ", genre='" + genre + '\'' +
-                ", price=" + price +
-                '}';
-    } 
 }

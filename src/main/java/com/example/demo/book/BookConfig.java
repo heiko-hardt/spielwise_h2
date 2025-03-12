@@ -40,6 +40,7 @@ public class BookConfig {
                 .build();
            
             repository.saveAll(List.of(book1, book2)); // und dann die Bücher
+            System.out.println("------>" + book1);
         };
     }
 }

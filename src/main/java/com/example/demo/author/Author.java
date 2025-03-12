@@ -3,6 +3,7 @@ package com.example.demo.author;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Author {
     @Id
     @SequenceGenerator(
@@ -40,14 +42,4 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // Verhindert endlose Rekursion
     private List<Book> books;  // Ein Author hat mehrere Books
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", authorName='" + authorName + '\'' +
-                ", birthDate=" + birthDate +
-                ", nationality='" + nationality + '\'' +
-                '}';
-    }
 }
