@@ -56,17 +56,17 @@ public class BookService {
 		}
 		if (title != null && 
 				title.length() > 0 && 
-				!book.getTitle().equals(title)) {
+				!title.equals(book.getTitle())) {
 					book.setTitle(title);
 		}
 		
 		if (genre != null && 
 				genre.length() > 0 && 
-				!book.getGenre().equals(genre)) {
+				!genre.equals(book.getGenre())) {
 					book.setGenre(genre);
 		}
 		if (price != null && 
-				!book.getPrice().equals(price)) {
+				!price.equals(book.getPrice())) {
 					book.setPrice(price);
 		}
 	}

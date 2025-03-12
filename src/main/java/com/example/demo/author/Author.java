@@ -1,6 +1,11 @@
 package com.example.demo.author;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 import com.example.demo.book.Book;
@@ -8,6 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
     @Id
     @SequenceGenerator(
@@ -30,14 +39,6 @@ public class Author {
     @JsonIgnore // Verhindert endlose Rekursion
     private List<Book> books;  // Ein Author hat mehrere Books
 
-    public Author() {}
-
-    public Author(Long id, String authorName, LocalDate birthDate, String nationality) {
-        this.id = id;
-        this.authorName = authorName;
-        this.birthDate = birthDate;
-        this.nationality = nationality;
-    }
 
     public Author(String authorName, LocalDate birthDate, String nationality) {
         this.authorName = authorName;
@@ -45,47 +46,7 @@ public class Author {
         this.nationality = nationality;
     }
 
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public List<Book> getBooks() {  // Getter für Bücher
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {  // Setter für Bücher
-        this.books = books;
-    }
-
+    @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
