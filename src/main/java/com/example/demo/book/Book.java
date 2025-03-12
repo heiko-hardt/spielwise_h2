@@ -2,6 +2,7 @@ package com.example.demo.book;
 import java.time.LocalDate;
 import java.time.Period;
 import com.example.demo.author.Author;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.lang.Nullable;
 import lombok.Setter;
@@ -42,6 +43,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false) // Fremdschlüssel in der Book-Tabelle
+    @JsonIgnoreProperties({"authorName", "birthDate", "nationality", "books"}) // Ignoriert alles außer ID
     private Author author;
 
     // Speichert nicht in DB ab er per API abrufbar
