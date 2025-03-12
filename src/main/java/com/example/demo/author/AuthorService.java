@@ -53,15 +53,24 @@ public class AuthorService {
                         String authorName,
                         LocalDate birthDate,
                         String nationality) {
-                            
+
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Author mit ID " + id + " existiert nicht"));
 
         if (authorName != null && 
 				authorName.length() > 0 && 
 				!author.getAuthorName().equals(authorName)) {
-			author.setAuthorName(authorName);
-		}        
+			        author.setAuthorName(authorName);
+		} 
+        if(birthDate != null &&
+                !author.getBirthDate().equals(birthDate)) {
+                    author.setBirthDate(birthDate);
+        }
+        if (nationality != null && 
+				nationality.length() > 0 && 
+                !author.getNationality().equals(nationality)) {
+                    author.setNationality(nationality);
+		}
     }
 
 

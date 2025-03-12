@@ -44,28 +44,30 @@ public class BookService {
 							Long authorId, 
 							String genre, 
 							Number price) {
-								
+
 		Book book = bookRepository.findById(id)
 				.orElseThrow(() -> new IllegalStateException("Buch mit ID " + id + " existiert nicht"));
 
+		
+		if (authorId != null) {
+			Author author = authorRepository.findById(authorId)
+				.orElseThrow(() -> new IllegalStateException("Autor mit ID " + authorId + " existiert nicht"));
+					book.setAuthor(author);
+		}
 		if (title != null && 
 				title.length() > 0 && 
 				!book.getTitle().equals(title)) {
-			book.setTitle(title);
+					book.setTitle(title);
 		}
-		if (authorId != null) {
-			Author author = authorRepository.findById(authorId)
-					.orElseThrow(() -> new IllegalStateException("Autor mit ID " + authorId + " existiert nicht"));
-			book.setAuthor(author);
-		}
+		
 		if (genre != null && 
 				genre.length() > 0 && 
 				!book.getGenre().equals(genre)) {
-			book.setGenre(genre);
+					book.setGenre(genre);
 		}
 		if (price != null && 
 				!book.getPrice().equals(price)) {
-			book.setPrice(price);
+					book.setPrice(price);
 		}
 	}
 }
