@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 import lombok.Setter;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
@@ -18,6 +19,7 @@ import jakarta.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Book {
     @Id
     @SequenceGenerator(
@@ -49,14 +51,6 @@ public class Book {
     // Speichert nicht in DB ab er per API abrufbar
     @Transient
     private LocalDate ageInYears;
-
-    public Book(String title, LocalDate publicationDate, Author author, String genre, Number price) {
-        this.title = title;
-        this.publicationDate = publicationDate;
-        this.author = author;
-        this.genre = genre;
-        this.price = price;
-    }
 
     // "AgeInYears" wird über API ausgegeben aber nicht in DAtenbank gespeichert
     public int getAgeInYears() {

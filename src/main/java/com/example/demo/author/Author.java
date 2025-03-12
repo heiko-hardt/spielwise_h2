@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Author {
     @Id
     @SequenceGenerator(
@@ -38,13 +40,6 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // Verhindert endlose Rekursion
     private List<Book> books;  // Ein Author hat mehrere Books
-
-
-    public Author(String authorName, LocalDate birthDate, String nationality) {
-        this.authorName = authorName;
-        this.birthDate = birthDate;
-        this.nationality = nationality;
-    }
 
     @Override
     public String toString() {
