@@ -1,6 +1,7 @@
 package com.example.demo.book;
 import java.time.LocalDate;
 import java.time.Period;
+import com.example.demo.author.Author;
 
 import jakarta.persistence.*;
 
@@ -20,20 +21,20 @@ public class Book {
     private Long id;
     private String title;
     private LocalDate publicationDate;
-    private String author;
     private String genre;
     private Number price;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false) // Fremdschlüssel in der Book-Tabelle
+    private Author author;
 
     // Speichert nicht in DB ab er per API abrufbar
     @Transient
     private LocalDate ageInYears;
 
+    public Book() {}
 
-    public Book() {
-        // Standard-Konstruktor für JPA
-    }
-
-    public Book(Long id, String title, LocalDate publicationDate, String author, String genre, Number price) {
+    public Book(Long id, String title, LocalDate publicationDate, Author author, String genre, Number price) {
         this.id = id;
         this.title = title;
         this.publicationDate = publicationDate;
@@ -42,7 +43,7 @@ public class Book {
         this.price = price;
     }
 
-    public Book(String title, LocalDate publicationDate, String author, String genre, Number price) {
+    public Book(String title, LocalDate publicationDate, Author author, String genre, Number price) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.author = author;
@@ -90,11 +91,11 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

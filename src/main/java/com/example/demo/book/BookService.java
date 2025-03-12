@@ -2,6 +2,8 @@ package com.example.demo.book;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import com.example.demo.author.Author;
+import com.example.demo.author.AuthorRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -9,11 +11,12 @@ import jakarta.transaction.Transactional;
 public class BookService {
 
 	private final BookRepository bookRepository;
+	private final AuthorRepository authorRepository;
 
-	public BookService(BookRepository bookRepository) {
+	public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
+		this.authorRepository = authorRepository;
 		this.bookRepository = bookRepository;
 	}
-
 	public List<Book> getBooks() {
 		return bookRepository.findAll();
 	}
@@ -38,7 +41,7 @@ public class BookService {
 	@Transactional // dank @Transactional brauchen wir hier keine @Query zu definieren
 	public void updateBook( Long id, 
 							String title, 
-							String author, 
+							Long authorId, 
 							String genre, 
 							Number price) {
 		Book book = bookRepository.findById(id)
@@ -49,9 +52,9 @@ public class BookService {
 				!book.getTitle().equals(title)) {
 			book.setTitle(title);
 		}
-		if (author != null && 
-				author.length() > 0 && 
-				!book.getAuthor().equals(author)) {
+		if (authorId != null) {
+			Author author = authorRepository.findById(authorId)
+					.orElseThrow(() -> new IllegalStateException("Autor mit ID " + authorId + " existiert nicht"));
 			book.setAuthor(author);
 		}
 		if (genre != null && 

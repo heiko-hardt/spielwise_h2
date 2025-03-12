@@ -41,10 +41,10 @@ public class BookController {
     public void updateBook(
         @RequestParam(required = false) Long id,
         @RequestParam(required = false) String title,
-        @RequestParam(required = false) String author,
+        @RequestParam(required = false) Long authorId,
         @RequestParam(required = false) String genre,
         @RequestParam(required = false) Number price) {
-            bookService.updateBook(id, title, author, genre, price);
+            bookService.updateBook(id, title, authorId, genre, price);
     }
     
 }

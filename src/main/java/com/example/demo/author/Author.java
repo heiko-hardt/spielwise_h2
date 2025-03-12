@@ -2,7 +2,9 @@ package com.example.demo.author;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-
+import java.util.List;
+import com.example.demo.book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -23,9 +25,12 @@ public class Author {
     private LocalDate birthDate;
     private String nationality;
     
-    public Author() {
     
-    }
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Verhindert endlose Rekursion
+    private List<Book> books;  // Ein Author hat mehrere Books
+
+    public Author() {}
 
     public Author(Long id, String authorName, LocalDate birthDate, String nationality) {
         this.id = id;
@@ -71,6 +76,14 @@ public class Author {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public List<Book> getBooks() {  // Getter für Bücher
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {  // Setter für Bücher
+        this.books = books;
     }
 
     public String toString() {
