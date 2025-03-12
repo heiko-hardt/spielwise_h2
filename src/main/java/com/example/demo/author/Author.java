@@ -9,13 +9,13 @@ import java.time.LocalDate;
 public class Author {
     @Id
     @SequenceGenerator(
-            name = "book_sequence",
-            sequenceName = "book_sequence",
+            name = "author_sequence",
+            sequenceName = "author_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "book_sequence"
+            generator = "author_sequence"
     )
 
     private Long id;
