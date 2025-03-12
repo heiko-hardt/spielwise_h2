@@ -3,10 +3,16 @@ import java.time.LocalDate;
 import java.time.Period;
 import com.example.demo.author.Author;
 
+import io.micrometer.common.lang.Nullable;
+import lombok.Setter;
+import lombok.Getter;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table
+@Setter
+@Getter
 public class Book {
     @Id
     @SequenceGenerator(
@@ -19,7 +25,10 @@ public class Book {
             generator = "book_sequence"
     )
     private Long id;
+    
+    @Nullable // anschauen
     private String title;
+
     private LocalDate publicationDate;
     private String genre;
     private Number price;
