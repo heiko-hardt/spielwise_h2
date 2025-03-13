@@ -35,8 +35,9 @@ public class AuthorController {
 
     @DeleteMapping(path = "{id}")
     public void deleteAuthor(
-        @PathVariable("id") Long id) {
-            authorService.deleteAuthor(id);
+        @PathVariable("id") Long id, 
+        @RequestParam(required = false, defaultValue = "false") boolean forceDelete) {
+            authorService.deleteAuthor(id, forceDelete);
     }
 
     @PutMapping(path = "{id}")
@@ -44,7 +45,7 @@ public class AuthorController {
         @PathVariable(required = true) Long id,
         @RequestParam(required = false) String authorName,
         @RequestParam(required = false) LocalDate birthDate,
-        @RequestParam(required=false) String nationality
+        @RequestParam(required = false) String nationality
         ) {
             authorService.updateAuthor(id, authorName, birthDate, nationality);
     }

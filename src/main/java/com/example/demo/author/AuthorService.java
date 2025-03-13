@@ -32,7 +32,7 @@ public class AuthorService {
 		//System.out.println("Speichere Author" + author);	
 	}
 
-    public void deleteAuthor(Long id) {
+    public void deleteAuthor(Long id, boolean forceDelete) {
 		boolean exists = authorRepository.existsById(id);
 		if (!exists) {
 			throw new IllegalStateException("Author mit ID " + id + " existiert nicht");
@@ -42,10 +42,17 @@ public class AuthorService {
         long bookCount = bookRepository.countBooksByAuthorId(id);
 
         if (bookCount > 0) {
+            if (forceDelete) {
+                // löscht alle Bücher des Authors
+                bookRepository.deleteByAuthorId(id);
+            } else {
+
             throw new IllegalStateException("Author mit ID " + id + " kann nicht gelöscht werden, weil er noch Bücher hat.");
         }  
-		authorRepository.deleteById(id);
-	}
+    }
+    // löscht den Athor
+    authorRepository.deleteById(id);
+    }
 
     @Transactional // dank @Transactional brauchen wir hier keine @Query zu definieren
     public void updateAuthor(
@@ -57,22 +64,14 @@ public class AuthorService {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Author mit ID " + id + " existiert nicht"));
 
-        if (authorName != null && 
-				authorName.length() > 0 && 
-				!author.getAuthorName().equals(authorName)) {
-			        author.setAuthorName(authorName);
+        if (authorName != null && authorName.length() > 0 && !author.getAuthorName().equals(authorName)) {
+			author.setAuthorName(authorName);
 		} 
-        if(birthDate != null &&
-                !author.getBirthDate().equals(birthDate)) {
-                    author.setBirthDate(birthDate);
+        if(birthDate != null && !author.getBirthDate().equals(birthDate)) {
+            author.setBirthDate(birthDate);
         }
-        if (nationality != null && 
-				nationality.length() > 0 && 
-                !author.getNationality().equals(nationality)) {
-                    author.setNationality(nationality);
+        if (nationality != null && nationality.length() > 0 && !author.getNationality().equals(nationality)) {
+            author.setNationality(nationality);
 		}
     }
-
-
-
 }
