@@ -22,7 +22,7 @@ public class BookService {
 	}
 
 	public void addNewBook(Book book) {
-		Optional<Book> bookOptional = bookRepository.findBookByTitle(book.getTitle());
+		Optional<Book> bookOptional = bookRepository.findByTitle(book.getTitle());
 		if (bookOptional.isPresent()) {
 			throw new IllegalStateException("Titel bereits vergeben");
 		}
@@ -52,22 +52,17 @@ public class BookService {
 		if (authorId != null) {
 			Author author = authorRepository.findById(authorId)
 				.orElseThrow(() -> new IllegalStateException("Autor mit ID " + authorId + " existiert nicht"));
-					book.setAuthor(author);
+			book.setAuthor(author);
 		}
-		if (title != null && 
-				title.length() > 0 && 
-				!title.equals(book.getTitle())) {
-					book.setTitle(title);
+		if (title != null && title.length() > 0 && !title.equals(book.getTitle())) {
+			book.setTitle(title);
 		}
 		
-		if (genre != null && 
-				genre.length() > 0 && 
-				!genre.equals(book.getGenre())) {
-					book.setGenre(genre);
+		if (genre != null && genre.length() > 0 && !genre.equals(book.getGenre())) {
+			book.setGenre(genre);
 		}
-		if (price != null && 
-				!price.equals(book.getPrice())) {
-					book.setPrice(price);
+		if (price != null && !price.equals(book.getPrice())) {
+			book.setPrice(price);
 		}
 	}
 }
