@@ -4,8 +4,8 @@ import java.time.Period;
 import java.util.Set;
 
 import com.example.demo.author.Author;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.example.demo.member.Member;
 
 import org.springframework.lang.Nullable;
@@ -50,9 +50,8 @@ public class Book {
 
 
     @ManyToMany(mappedBy = "favoriteBooks") // Verknüpfung mit Member-Tabelle
-    @JsonManagedReference // verhindert eine rekursive Endlosschleife, wenn die Beziehung in JSON ausgegeben wird
+    @JsonIgnore // Verhindert JSON-Ausgabe der Many-to-Many-Beziehung
     private Set<Member> favoritedBy;
-
 
     // Speichert nicht in DB ab er per API abrufbar
     @Transient

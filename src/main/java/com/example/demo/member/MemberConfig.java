@@ -22,7 +22,7 @@ public class MemberConfig {
                 .build();
             
             Book book1 = Book.builder()
-                .title("Book 1")
+                .title("Book 111")
                 .publicationDate(LocalDate.of(1955, 7, 29))
                 .author(author)
                 .genre("Fantasy")
@@ -34,9 +34,17 @@ public class MemberConfig {
                 .email("member_1@web.de")
                 .build();
 
+            // Speichern in der DB    
             authorRepository.save(author);    
             bookRepository.save(book1);
             memberRepository.save(member1);
+
+            // MItglieder favorisieren Bücher
+            member1.getFavoriteBooks().add(book1);
+
+            // aktualisierte Mitglieder speichern
+            memberRepository.save(member1);
+
             System.out.println("------>" + member1); 
         };
     }
