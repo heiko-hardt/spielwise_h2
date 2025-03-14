@@ -1,16 +1,11 @@
 package com.example.demo.author;
+import com.example.demo.book.Book;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import com.example.demo.book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

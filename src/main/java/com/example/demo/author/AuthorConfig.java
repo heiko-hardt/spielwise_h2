@@ -20,6 +20,7 @@ public class AuthorConfig {
                 .build();
          
             repository.save(author);
+            System.out.println("------>" + author); 
         };
     }
 }

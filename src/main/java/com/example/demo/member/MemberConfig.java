@@ -1,26 +1,26 @@
-package com.example.demo.book;
-import java.time.LocalDate;
-import java.util.List;
+package com.example.demo.member;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import com.example.demo.book.BookRepository;
 import com.example.demo.author.Author;
 import com.example.demo.author.AuthorRepository;
+import com.example.demo.book.Book;
+import java.time.LocalDate;
+import org.springframework.boot.CommandLineRunner;
 
 @Configuration
-public class BookConfig {
+public class MemberConfig {
 
     @Bean
-    CommandLineRunner bookCommandLineRunner(BookRepository bookRepository, AuthorRepository authorRepository) {
+    CommandLineRunner memberCommandLineRunner(MemberRepository memberRepository, BookRepository bookRepository, AuthorRepository authorRepository) {
         return args -> {
 
             Author author = Author.builder() 
                 .authorName("J.R.R. Tolkien")
                 .birthDate(LocalDate.of(1892, 1, 3))
                 .build();
-
+            
             Book book1 = Book.builder()
                 .title("Book 1")
                 .publicationDate(LocalDate.of(1955, 7, 29))
@@ -29,17 +29,15 @@ public class BookConfig {
                 .price(19.99)
                 .build();
 
-            Book book2 = Book.builder()
-                .title("Book 2")
-                .publicationDate(LocalDate.of(1954, 7, 29))
-                .author(author)
-                .genre("Fantasy")
-                .price(19.99)
+            Member member1 = Member.builder()
+                .name("Mia")
+                .email("member_1@web.de")
                 .build();
-           
-            authorRepository.save(author); // Erst wird Author gespeichert
-            bookRepository.saveAll(List.of(book1, book2)); // und dann die Bücher
-            System.out.println("------>" + book1);
+
+            authorRepository.save(author);    
+            bookRepository.save(book1);
+            memberRepository.save(member1);
+            System.out.println("------>" + member1); 
         };
     }
 }
