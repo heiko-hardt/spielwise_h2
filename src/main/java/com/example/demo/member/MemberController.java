@@ -24,6 +24,20 @@ public class MemberController {
         memberService.addMember(member);
     }
 
+    @DeleteMapping(path = "{id}")
+    public void deleteMember(
+        @PathVariable("id") Long id) {
+            memberService.deleteMember(id);
+    }
+
+    @PutMapping(path = "{id}")
+    public void updateMember(
+        @PathVariable(required = true) Long id,
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String email) {
+            memberService.updateMember(id, name, email);
+    }  
+
     // favorite_books Tabelle
     @PostMapping("/{memberId}/favorites/{bookId}")
     public void addFavoriteBook(
@@ -31,14 +45,6 @@ public class MemberController {
         @PathVariable Long bookId){
             memberService.addFavoriteBook(memberId, bookId);
     }
-
-    @DeleteMapping(path = "{id}")
-    public void deleteMember(
-        @PathVariable("id") Long id) {
-            memberService.deleteMember(id);
-    }
-
-    // PutMapping
 
 
 

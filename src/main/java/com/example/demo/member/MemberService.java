@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 import com.example.demo.book.Book;
 import com.example.demo.book.BookRepository;
@@ -31,8 +32,6 @@ public class MemberService {
         memberRepository.save(member);    
     }
 
-
-//
     public void deleteMember(Long id) {
 		boolean exists = memberRepository.existsById(id);
 		if (!exists) {
@@ -40,7 +39,20 @@ public class MemberService {
 		}
 		memberRepository.deleteById(id);
 	}
-//
+
+    @Transactional // explizites Speichern nicht nötig - wird automatisch gemacht, weil @Transactional alle Änderungen merkt und speichert
+    public void updateMember(Long id, String name, String email) {
+        Member member = memberRepository.findById(id)
+            .orElseThrow(() -> new IllegalStateException("Mitglied mit ID " + id + " existiert nicht"));
+        
+        if (name != null && name.length() > 0 && !name.equals(member.getName())) {
+            member.setName(name);
+        }
+        if (email != null && email.length() > 0 && !email.equals(member.getEmail())) {
+            member.setEmail(email);
+        }
+    }
+
 
     // favorite_books Tabelle
     public void addFavoriteBook(Long memberId, Long BookId){

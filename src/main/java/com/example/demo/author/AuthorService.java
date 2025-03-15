@@ -54,7 +54,7 @@ public class AuthorService {
     authorRepository.deleteById(id);
     }
 
-    @Transactional // dank @Transactional brauchen wir hier keine @Query zu definieren
+    @Transactional // explizites Speichern nicht nötig - wird automatisch gemacht, weil @Transactional alle Änderungen merkt und speichert
     public void updateAuthor(
                         Long id,
                         String authorName,
