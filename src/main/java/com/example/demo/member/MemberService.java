@@ -1,5 +1,8 @@
 package com.example.demo.member;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.book.Book;
@@ -16,6 +19,18 @@ public class MemberService {
         this.bookRepository = bookRepository;
     }
 
+    public List<Member> getMembers() {
+		return memberRepository.findAll();
+	}
+
+    public void addMember(Member member) {
+        Optional<Member> existingMember = memberRepository.findByName(member.getName());
+        if (existingMember.isPresent())
+            throw new IllegalStateException(member.getName() + " existiert bereits");  
+        
+        memberRepository.save(member);    
+    }
+
     public void addFavoriteBook(Long memberId, Long BookId){
 
         Member member = memberRepository.findById(memberId)
@@ -26,6 +41,5 @@ public class MemberService {
         
         member.getFavoriteBooks().add(book);
         memberRepository.save(member);
-
     }
 }
