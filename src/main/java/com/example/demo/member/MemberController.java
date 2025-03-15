@@ -24,6 +24,7 @@ public class MemberController {
         memberService.addMember(member);
     }
 
+    // favorite_books Tabelle
     @PostMapping("/{memberId}/favorites/{bookId}")
     public void addFavoriteBook(
         @PathVariable Long memberId, 
@@ -31,7 +32,11 @@ public class MemberController {
             memberService.addFavoriteBook(memberId, bookId);
     }
 
-    // DeleteMapping
+    @DeleteMapping(path = "{id}")
+    public void deleteMember(
+        @PathVariable("id") Long id) {
+            memberService.deleteMember(id);
+    }
 
     // PutMapping
 

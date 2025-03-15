@@ -31,6 +31,18 @@ public class MemberService {
         memberRepository.save(member);    
     }
 
+
+//
+    public void deleteMember(Long id) {
+		boolean exists = memberRepository.existsById(id);
+		if (!exists) {
+			throw new IllegalStateException("Mitglied mit ID " + id + " existiert nicht");
+		}
+		memberRepository.deleteById(id);
+	}
+//
+
+    // favorite_books Tabelle
     public void addFavoriteBook(Long memberId, Long BookId){
 
         Member member = memberRepository.findById(memberId)
