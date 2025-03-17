@@ -39,13 +39,13 @@ public class MemberConfig {
             bookRepository.save(book1);
             memberRepository.save(member1);
 
-            // MItglieder favorisieren Bücher
+            // Mitglieder favorisieren Bücher
             member1.getFavoriteBooks().add(book1);
 
             // aktualisierte Mitglieder speichern
             memberRepository.save(member1);
 
-            System.out.println("------>" + member1); 
+            // System.out.println("------>" + member1); 
         };
     }
 }

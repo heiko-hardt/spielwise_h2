@@ -1,7 +1,10 @@
 package com.example.demo.member;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
@@ -53,16 +56,32 @@ public class MemberService {
         }
     }
 
-
+    
     // favorite_books Tabelle
-    public void addFavoriteBook(Long memberId, Long BookId){
 
+    public List<Map<String, Long>> getAllFavorites() {
+        List<Object[]> results = memberRepository.findAllFavoriteBooks();
+                                                                                                                                                                                                                    
+        List <Map<String, Long>> favorites = new ArrayList<>();
+        for (Object[] row : results) {
+            Map<String, Long> favorite = new HashMap<>();
+            favorite.put("memberId", (Long) row[0]);
+            favorite.put("bookId", (Long) row[1]);
+            favorites.add(favorite);
+        }
+        return favorites;
+    }
+
+    public void addFavoriteBook(Long memberId, Long bookId){
         Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new IllegalStateException("Mitglied mit ID " + memberId + " existiert nicht"));
 
-        Book book = bookRepository.findById(BookId)
-            .orElseThrow(() -> new IllegalStateException("Buch mit ID " + BookId + " existiert nicht"));
-        
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new IllegalStateException("Buch mit ID " + bookId + " existiert nicht"));
+
+        if (member.getFavoriteBooks().contains(book)) {  // Verhindert Duplikate
+            throw new IllegalStateException("Buch mit ID " + bookId + " ist bereits in den Favoriten von Mitglied " + memberId);       
+        }
         member.getFavoriteBooks().add(book);
         memberRepository.save(member);
     }

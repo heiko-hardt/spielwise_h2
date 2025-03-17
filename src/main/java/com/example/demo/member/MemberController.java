@@ -1,6 +1,7 @@
 package com.example.demo.member;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,8 +21,9 @@ public class MemberController {
     }
 
     @PostMapping
-    public void registerNewMember(@RequestBody Member member) {
-        memberService.addMember(member);
+    public void registerNewMember(
+        @RequestBody Member member) {
+            memberService.addMember(member);
     }
 
     @DeleteMapping(path = "{id}")
@@ -39,13 +41,16 @@ public class MemberController {
     }  
 
     // favorite_books Tabelle
+
+    @GetMapping("/all-favorites")
+    public List<Map<String, Long>> getAllFavorites() { // da wir kien Entity für Favoriten haben, geben wir eine Liste von Maps zurück
+        return memberService.getAllFavorites();
+    }
+
     @PostMapping("/{memberId}/favorites/{bookId}")
     public void addFavoriteBook(
         @PathVariable Long memberId, 
         @PathVariable Long bookId){
             memberService.addFavoriteBook(memberId, bookId);
     }
-
-
-
 }
