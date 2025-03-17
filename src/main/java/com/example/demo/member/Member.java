@@ -1,7 +1,9 @@
 package com.example.demo.member;
-import com.example.demo.book.Book;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.example.demo.book.Book;
+import com.example.demo.shared.Address;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.*;
@@ -23,6 +25,9 @@ public class Member {
 
     private String name;
     private String email;
+
+    @Embedded
+    private Address address;
 
     @ManyToMany
     @JoinTable(

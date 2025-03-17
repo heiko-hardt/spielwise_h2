@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 
 import com.example.demo.book.Book;
 import com.example.demo.book.BookRepository;
+import com.example.demo.shared.Address;
 
 @Service
 public class MemberService {
@@ -44,7 +45,7 @@ public class MemberService {
 	}
 
     @Transactional // explizites Speichern nicht nötig - wird automatisch gemacht, weil @Transactional alle Änderungen merkt und speichert
-    public void updateMember(Long id, String name, String email) {
+    public void updateMember(Long id, String name, String email, Address address) {
         Member member = memberRepository.findById(id)
             .orElseThrow(() -> new IllegalStateException("Mitglied mit ID " + id + " existiert nicht"));
         
@@ -53,6 +54,9 @@ public class MemberService {
         }
         if (email != null && email.length() > 0 && !email.equals(member.getEmail())) {
             member.setEmail(email);
+        }
+        if (address != null) {
+            member.setAddress(address);
         }
     }
 

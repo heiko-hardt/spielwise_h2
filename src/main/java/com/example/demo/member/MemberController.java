@@ -1,5 +1,6 @@
 package com.example.demo.member;
 
+import com.example.demo.shared.Address;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,9 @@ public class MemberController {
     public void updateMember(
         @PathVariable Long id,
         @RequestParam(required = false) String name,
-        @RequestParam(required = false) String email) {
-            memberService.updateMember(id, name, email);
+        @RequestParam(required = false) String email,
+        @RequestParam(required = false) Address address) {
+            memberService.updateMember(id, name, email, address);
     }  
 
     // favorite_books Tabelle
