@@ -42,7 +42,7 @@ public class AuthorController {
 
     @PutMapping(path = "{id}")
     public void updateAuthor(
-        @PathVariable(required = true) Long id,
+        @PathVariable Long id,
         @RequestParam(required = false) String authorName,
         @RequestParam(required = false) LocalDate birthDate,
         @RequestParam(required = false) String nationality

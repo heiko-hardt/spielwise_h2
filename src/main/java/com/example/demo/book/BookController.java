@@ -40,7 +40,7 @@ public class BookController {
 
     @PutMapping(path = "{id}")
     public void updateBook(
-        @PathVariable(required = true) Long id,
+        @PathVariable Long id,
         @RequestParam(required = false) String title,
         @RequestParam(required = false) Long authorId,
         @RequestParam(required = false) String genre,

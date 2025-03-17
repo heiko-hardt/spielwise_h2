@@ -34,7 +34,7 @@ public class MemberController {
 
     @PutMapping(path = "{id}")
     public void updateMember(
-        @PathVariable(required = true) Long id,
+        @PathVariable Long id,
         @RequestParam(required = false) String name,
         @RequestParam(required = false) String email) {
             memberService.updateMember(id, name, email);
@@ -59,5 +59,5 @@ public class MemberController {
         @PathVariable Long memberId, 
         @PathVariable Long bookId) {
             memberService.removeFavoriteBook(memberId, bookId);
-}
+    }
 }
