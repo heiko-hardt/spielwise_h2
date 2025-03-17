@@ -53,4 +53,11 @@ public class MemberController {
         @PathVariable Long bookId){
             memberService.addFavoriteBook(memberId, bookId);
     }
+
+    @DeleteMapping("/{memberId}/favorites/{bookId}")
+    public void removeFavoriteBook(
+        @PathVariable Long memberId, 
+        @PathVariable Long bookId) {
+            memberService.removeFavoriteBook(memberId, bookId);
+}
 }

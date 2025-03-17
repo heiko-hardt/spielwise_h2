@@ -85,4 +85,19 @@ public class MemberService {
         member.getFavoriteBooks().add(book);
         memberRepository.save(member);
     }
+
+    public void removeFavoriteBook(Long memberId, Long bookId) {
+        Member member = memberRepository.findById(memberId)
+            .orElseThrow(() -> new IllegalStateException("Mitglied mit ID " + memberId + " existiert nicht"));
+    
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new IllegalStateException("Buch mit ID " + bookId + " existiert nicht"));
+    
+        // Prüfen, ob das Buch wirklich in den Favoriten ist
+        if (!member.getFavoriteBooks().contains(book)) {
+            throw new IllegalStateException("Buch mit ID " + bookId + " ist nicht in den Favoriten von Mitglied " + memberId);
+        }
+        member.getFavoriteBooks().remove(book);
+        memberRepository.save(member);
+    }
 }
