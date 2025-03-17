@@ -47,7 +47,7 @@ public class MemberController {
         return memberService.getAllFavorites();
     }
 
-    @PostMapping("/{memberId}/favorites/{bookId}")
+    @PostMapping("/{memberId}/book/{bookId}")
     public void addFavoriteBook(
         @PathVariable Long memberId, 
         @PathVariable Long bookId){
