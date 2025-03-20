@@ -14,12 +14,11 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table
 @Setter
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor // notwendig für Hibernate
 @AllArgsConstructor
-@Builder
+@Builder // Erlaubt flexibles Erstellen von Objekten
 @ToString(exclude = "favoritedBy") // Verhindert rekursive Ausgabe
 public class Book {
     @Id

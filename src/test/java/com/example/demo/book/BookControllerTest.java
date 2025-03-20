@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class) // Aktiviert Mockito in JUnit 5
 public class BookControllerTest {
 
-    private MockMvc mockMvc; // Manuelles MockMvc statt @WebMvcTest
+    private MockMvc mockMvc; // Ist ein echte Java-Klasse (manuelles MockMvc statt @WebMvcTest) um echte HTTP-Anfragen zu simulieren
 
     @Mock
     private BookService bookService; // Ersetzt den Service (ersetzt @MockBean mit @Mock

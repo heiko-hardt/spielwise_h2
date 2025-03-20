@@ -11,7 +11,6 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table
 @Getter
 @Setter
 @NoArgsConstructor
