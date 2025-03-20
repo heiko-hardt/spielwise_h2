@@ -1,6 +1,7 @@
 package com.example.demo.author;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,8 @@ import java.util.List;
 @RequestMapping(path = "api/v1/author")
 public class AuthorController {
 
-    private final AuthorService authorService;
-
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
+    @Autowired
+    private AuthorService authorService;
 
     @GetMapping
 	public List<Author> getAuthors() {

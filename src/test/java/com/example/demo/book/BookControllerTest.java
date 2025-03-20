@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Collections;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class) // Aktiviert Mockito in JUnit 5
@@ -22,20 +23,20 @@ public class BookControllerTest {
     private MockMvc mockMvc; // Manuelles MockMvc statt @WebMvcTest
 
     @Mock
-    private BookService bookService; // Ersetzt @MockBean mit @Mock
+    private BookService bookService; // Ersetzt den Service (ersetzt @MockBean mit @Mock
 
     @InjectMocks
     private BookController bookController; // Fügt den Mock Service in den Controller ein
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(bookController).build(); // Manuelles Setup von MockMvc
+        mockMvc = MockMvcBuilders.standaloneSetup(bookController).build(); // simuliert HTTP-Requests. (manuelles Setup von MockMvc)
     }
 
     // TEST 1: GET /api/v1/book (Bücher abrufen)
     @Test
     void testGetBooks() throws Exception {
-        when(bookService.getBooks()).thenReturn(Collections.emptyList()); // Simuliert eine leere Liste
+        when(bookService.getBooks()).thenReturn(Collections.emptyList()); // Simuliert Verlaten (eine leere Liste)
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/book"))
                 .andExpect(MockMvcResultMatchers.status().isOk()) // Erwartet HTTP 200 OK

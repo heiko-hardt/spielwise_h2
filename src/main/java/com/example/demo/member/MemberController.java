@@ -3,6 +3,8 @@ package com.example.demo.member;
 import com.example.demo.shared.Address;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -10,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/v1/member")
 public class MemberController {
 
-    private final MemberService memberService;
-
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping
 	public List<Member> getMembers() {

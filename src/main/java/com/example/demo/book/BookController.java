@@ -1,6 +1,7 @@
 package com.example.demo.book;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,8 @@ import java.util.List;
 @RequestMapping(path = "api/v1/book")
 public class BookController {
 
-    private final BookService bookService;
-
-    // @Autowired -> auskommentiert, weil es unnötig ist
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    @Autowired
+    private BookService bookService;
     
     @GetMapping
 	public List<Book> getBooks() {
