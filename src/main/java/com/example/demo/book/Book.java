@@ -14,7 +14,6 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Setter
 @Getter
 @NoArgsConstructor // notwendig für Hibernate
 @AllArgsConstructor
@@ -33,18 +32,23 @@ public class Book {
     )
     private Long id;
     
+    @Setter
     private String title;
+    
     private LocalDate publicationDate;
     
+    @Setter
     @Nullable
     private String genre;
     
+    @Setter
     @Nullable
     private Number price;
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = true) // Fremdschlüssel in der Book-Tabelle
     @JsonIgnoreProperties({"authorName", "birthDate", "nationality", "books"}) // Ignoriert alles außer ID
+    @Setter
     private Author author;
 
 

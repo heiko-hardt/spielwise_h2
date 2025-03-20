@@ -9,7 +9,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,8 +27,14 @@ public class Author {
     )
 
     private Long id;
+
+    @Setter
     private String authorName;
+
+    @Setter
     private LocalDate birthDate;
+
+    @Setter
     private String nationality;
     
     

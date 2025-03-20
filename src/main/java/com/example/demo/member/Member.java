@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,9 +21,13 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     private String name;
+
+    @Setter
     private String email;
 
+    @Setter
     @Embedded
     private Address address;
 
