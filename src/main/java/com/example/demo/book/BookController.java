@@ -1,6 +1,7 @@
 package com.example.demo.book;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class BookController {
     }
 
     @PostMapping
-    public void registerNewBook(@RequestBody Book book) {
+    public void registerNewBook(@Valid @RequestBody Book book) {
         bookService.addNewBook(book);
     }
 

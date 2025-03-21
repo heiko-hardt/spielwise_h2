@@ -36,7 +36,7 @@ public class BookControllerTest {
     // TEST 1: GET /api/v1/book (Bücher abrufen)
     @Test
     void testGetBooks() throws Exception {
-        when(bookService.getBooks()).thenReturn(Collections.emptyList()); // Simuliert Verlaten (eine leere Liste)
+        when(bookService.getBooks()).thenReturn(Collections.emptyList()); // Simuliert Verhalten (eine leere Liste)
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/book"))
                 .andExpect(MockMvcResultMatchers.status().isOk()) // Erwartet HTTP 200 OK

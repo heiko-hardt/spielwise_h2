@@ -2,7 +2,7 @@ package com.example.demo.member;
 
 import com.example.demo.book.Book;
 import com.example.demo.shared.Address;
-
+import com.example.demo.validation.ValidEmail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,7 @@ public class Member {
     private String name;
 
     @Setter
+    @ValidEmail // Verwendet die ValidEmail-Annotation
     private String email;
 
     @Setter

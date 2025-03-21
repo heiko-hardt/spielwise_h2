@@ -1,6 +1,10 @@
 package com.example.demo.member;
 
 import com.example.demo.shared.Address;
+import com.example.demo.validation.ValidEmail;
+
+import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +26,7 @@ public class MemberController {
 
     @PostMapping
     public void registerNewMember(
-        @RequestBody Member member) {
+        @Valid @RequestBody Member member) { // @Valid sorgt dafür, dass die Validierung der E-Mail-Adresse durchgeführt wird bevore Service aufgerufen wird
             memberService.addMember(member);
     }
 
@@ -36,7 +40,7 @@ public class MemberController {
     public void updateMember(
         @PathVariable Long id,
         @RequestParam(required = false) String name,
-        @RequestParam(required = false) String email,
+        @RequestParam(required = false) @ValidEmail String email,
         @RequestParam(required = false) Address address) {
             memberService.updateMember(id, name, email, address);
     }  

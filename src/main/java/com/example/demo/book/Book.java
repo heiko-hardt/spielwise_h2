@@ -1,4 +1,5 @@
 package com.example.demo.book;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Set;
@@ -7,6 +8,7 @@ import com.example.demo.author.Author;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.example.demo.member.Member;
+import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.lang.Nullable;
 import lombok.*;
@@ -16,9 +18,9 @@ import jakarta.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor // notwendig für Hibernate
-@AllArgsConstructor
+@AllArgsConstructor // Notwendig für @Builder (@Builder nutzt den AllArgsConstructor in Hintergrund)
 @Builder // Erlaubt flexibles Erstellen von Objekten
-@ToString(exclude = "favoritedBy") // Verhindert rekursive Ausgabe
+@ToString(exclude = "favoritedBy") // favoritedBy ist ausgeschlossen -> verhindert rekursive Ausgabe
 public class Book {
     @Id
     @SequenceGenerator(
@@ -33,6 +35,7 @@ public class Book {
     private Long id;
     
     @Setter
+    @NotBlank
     private String title;
     
     private LocalDate publicationDate;
