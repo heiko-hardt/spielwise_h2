@@ -25,7 +25,6 @@ public class Member {
     private String name;
 
     @Setter
-    @ValidEmail // Verwendet die ValidEmail-Annotation
     private String email;
 
     @Setter

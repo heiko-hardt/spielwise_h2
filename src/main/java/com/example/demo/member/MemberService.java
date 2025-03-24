@@ -50,10 +50,10 @@ public class MemberService {
         Member member = memberRepository.findById(id)
             .orElseThrow(() -> new IllegalStateException("Mitglied mit ID " + id + " existiert nicht"));
         
-        if (name != null && name.length() > 0 && !name.equals(member.getName())) {
+        if (!name.equals(member.getName())) {
             member.setName(name);
         }
-        if (email != null && email.length() > 0 && !email.equals(member.getEmail())) {
+        if (!email.equals(member.getEmail())) {
             member.setEmail(email);
         }
         if (address != null) {

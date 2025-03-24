@@ -13,9 +13,9 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        if (email == null) {
-            return false; // null ist ungültig
-        }
-        return PATTERN.matcher(email).matches();
+
+        return 
+            email != null 
+            && PATTERN.matcher(email).matches();
     }
 }

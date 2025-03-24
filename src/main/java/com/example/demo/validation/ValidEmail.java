@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidEmail {
-    String message() default "E-Mail ist ungültig"; // Fehlermeldung
+    String message() default "Ungültige E-Mail-Adresse"; // Fehlermeldung
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
