@@ -59,11 +59,11 @@ public class Book {
     @JsonIgnore // Verhindert JSON-Ausgabe der Many-to-Many-Beziehung
     private Set<Member> favoritedBy;
 
-    // Speichert nicht in DB ab er per API abrufbar
+    // Speichert nicht in DB ab, nur per API abrufbar
     @Transient
     private LocalDate ageInYears;
 
-    // "AgeInYears" wird über API ausgegeben aber nicht in DAtenbank gespeichert
+    // "AgeInYears" wird über API ausgegeben aber nicht in Datenbank gespeichert
     public int getAgeInYears() {
         return Period.between(this.publicationDate, LocalDate.now()).getYears();
     }   

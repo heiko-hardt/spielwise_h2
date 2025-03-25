@@ -1,7 +1,5 @@
 // 1. Fängt alle Validierungsfehler ab, die durch Annotationen an Methodenparametern entstehen (z.B. PUT)
-// 2. 
-// 3. Gibt 500 Internal Server Error zurück.
-
+// 2. Gibt 500 Internal Server Error zurück.
 
 package com.example.demo.exception;
 

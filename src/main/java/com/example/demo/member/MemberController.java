@@ -28,7 +28,7 @@ public class MemberController {
         return memberService.getMembers();
     }
 
-    // @Valid beom POST führt alle Validierungen durch, die wir in der Member-Klasse definiert haben.
+    // @Valid beim POST führt alle Validierungen durch, die ich in der Member-Klasse definiert habe.
     // Wenn ich @Valid weg lasse, wird die Validierung nicht mehr im Controller durchgeführt, aber trozdem im Service
     @PostMapping
     public void registerNewMember(
@@ -51,12 +51,11 @@ public class MemberController {
         // Spring gibt seinen eigenen Fehler zurück, wenn der Parameter nicht vorhanden ist.
         // Danach (wenn es durch kommt) wird die Validierung durchgeführt und meine definierte message zurückgegeben.    
         @RequestParam(required = true) 
-            @NotBlank(message = "Name darf nicht leer sein") // prüft nach nicht leer, nicht Leerzeichen, nicht null
-            @Size(min = 2, max = 100, message = "Name muss zwischen 2 und 100 Zeichen lang sein") 
+            @Size(min = 1, max = 100, message = "Name muss zwischen 2 und 100 Zeichen lang sein") 
             String name,
         
         @RequestParam(required = true) 
-            @NotBlank(message = "E-Mail darf nicht leer sein") 
+            @NotBlank(message = "E-Mail darf nicht leer sein") // prüft nach nicht leer, nicht Leerzeichen, nicht null
             //@ValidEmail verwendet die ValidEmail-Annotation
             @ValidEmail
             String email,
